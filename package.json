@@ -1,7 +1,7 @@
 {
-  "name": "rugiles-videography",
+  "name": "webpack-starter-project",
   "version": "1.0.0",
-  "description": "Rugiles website",
+  "description": "A simple webpack project to kick off development for landing pages or simple websites.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
