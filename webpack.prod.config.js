@@ -4,7 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
 
@@ -15,11 +16,11 @@ module.exports = {
  },
  optimization: {
   minimizer: [
-   new UglifyJsPlugin({
-    cache: true,
-    parallel: true,
-    sourceMap: false
-   }),
+    new TerserPlugin({
+      cache: true,
+      parallel: true,
+
+    }),
    new OptimizeCSSAssetsPlugin({})
   ]
  },
@@ -100,6 +101,13 @@ module.exports = {
    }
   }),
   new CleanWebpackPlugin(['dist']),
+  new CompressionPlugin({
+    filename: "[path].gz[query]",
+    algorithm: "gzip",
+    test: /\.js$|\.css$|\.html$/,
+    threshold: 10240,
+    minRatio: 0.8
+  }),
   new HtmlWebpackPlugin({
    template: './src/index.handlebars',
    minify: {
